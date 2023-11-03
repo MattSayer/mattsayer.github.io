@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author"      content="Matt Sayer">
+	
+	<title>Submariner | Matt Sayer - Game Developer Portfolio</title>
+
+	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
+	
+	<!-- Bootstrap -->
+	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+	<!-- Icon font -->
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<!-- Fonts -->
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700">
+	<!-- Custom styles -->
+	<link rel="stylesheet" href="assets/css/styles.css">
+
+	<!--[if lt IE 9]> <script src="assets/js/html5shiv.js"></script> <![endif]-->
+</head>
+<body>
+
+<header id="header">
+	<div id="head">
+		<h1 id="logo" class="text-center">
+			<span class="title">Matt Sayer</span>
+			<span class="tagline">Experienced programmer and indie game developer<br>
+				<a href="mailto:macka1080@hotmail.com">macka1080@hotmail.com</a></span>
+		</h1>
+	</div>
+
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-main"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+			</div>
+			
+			<div id="navbar-main" class="navbar-collapse collapse">
+				
+				<ul class="nav navbar-nav">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="about.html">About</a></li>
+					<li><a href="contact.html">Contact</a></li>
+				</ul>
+			
+			</div><!--/.nav-collapse -->			
+		</div>	
+	</nav>
+</header>
+
+<main id="main">
+
+	<div class="container">
+		
+		<div class="row topspace">
+			<div class="col-sm-8 col-sm-offset-2">
+ 				<article class="post">
+					<header class="entry-header">
+ 						<div class="entry-meta"> 
+ 							<span class="posted-on"><time class="entry-date published">2023</time></span>			
+ 						</div> 
+ 						<h1 class="entry-title"><a href="https://macka1080.itch.io/submariner">Submariner</a></h1>
+					</header> 
+					<div class="entry-content">
+						<p><iframe class="yt-video" src="https://www.youtube.com/embed/urUmDHE-lMo?si=SnhplRRGzROzvYJ7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+						<p>
+							<div><strong>Release:</strong> 3rd Nov 2023</div>
+							<div><strong>Genre:</strong> Adventure</div>
+							<div><strong>Engine:</strong> Unity</div>
+							<div><strong>Platforms:</strong> Windows</div>
+							<div><strong>Store page:</strong> <a href="https://macka1080.itch.io/submariner" target="_blank">Itch.io</a></div>
+						</p>
+						
+						<p>
+							I worked on this project over the course of three months in my spare time. I began with the general concept of piloting a small submarine trapped in a vicious storm, expanding it out to a simple adventure-game structure where the player must collect various items to Macgyver together a solution to the storm problem.
+						</p>
+						<p>
+							After fleshing out the general game structure, I created a relationship diagram to model the various systems I would need to build and how they would interact with each other. While not 100% accurate to the final product, this initial design is quite close and ensured the implementation phase progressed smoothly and efficiently.
+						</p>
+						<img src="assets/images/submariner-diagram.png" />
+						
+						<h2 class="section-title"><span>Key features</span></h2>
+						
+						<h4>Buoyancy</h4>
+						<p>
+							<img alt="Video showing waves applying physical forces to buoyant objects" class="full-width" src="assets/images/buoyancy.gif" />
+						</p>
+						<p>
+							Functional waves are a core component of the game and consist of three cumulative Gerstner wave functions that displace the vertices of a procedural mesh. Visual displacement is handled by a custom shader, but the WaveManager class is responsible for calculating displacement used in physics calculations. 
+						</p>
+						<p>
+							To maintain performance, the WaveManager processes requests on-demand and only calculates displacement within a small sample radius of an object’s world-space position, using a grid-based lookup to reduce performance costs further. These results are cached per-frame to avoid repeated calculations for bodies in close proximity to one another.
+						</p>
+						<p>
+							On the buoyant bodies themselves, a buoyancy controller tracks changes in wave height over time and uses the normal to calculate the strength of the physics force to apply. 
+						</p>
+
+						<h4>Game Events</h4>
+						<p>
+							The GameEvent ScriptableObject is my implementation of the Observer/Subscriber pattern, acting as a conduit for decoupled communication between classes. When one class needs to inform others of a specific event, a change in data state, or requires another class to perform some function, it calls the FireEvent method of the relevant GameEvent. Subscribers to that GameEvent are then notified, allowing them to respond accordingly without a direct dependency on the calling class. 
+						</p>
+						<p>
+							My implementation here supports passing a variety of data types as parameters, as well as allowing for callback functions for when some measure of dependency is unavoidable.
+						</p>
+
+						<p>
+							<img alt="Vertex displacement used to simulate a fish swimming" class="full-width" src="assets/images/fish-displacement.gif" />
+						</p>
+
+
+						<h4>Audio Controller</h4>
+						<p>
+							To minimise the number of audio sources in the scene and streamline audio management, I implemented an audio controller to handle audio requests. The controller maintains separate pools of audio sources for one-off audio requests of various purposes (UI/2D audio, 3D spatial audio) as well as a pool for loaned “proxy” audio sources for classes that produce looping or frequent audio requests.
+						</p>
+						<p>
+							When audio requests are made, the controller gets the next available audio source from the corresponding pool and configures it according to the request parameters as well as the current game state, adjusting volume, mixer groups, and location (for 3D audio) before playing the requested audio clip. 
+						</p>
+						<p>
+							This approach ensures consistency between audio-emitting classes, and simplifies the process of adding audio to additional classes. It also allows for features such as automatic cross-fading between music tracks (for instance, when pausing the game) as well as easy updating of volume levels when the player changes audio settings.
+						</p>
+						<p>
+							As mentioned above, the audio controller also provides a ProxyAudioSource object for classes that require continuous or frequent audio emission, such as the engine of the submarine. The ProxyAudioSource acts as a wrapper for a native AudioSource component, managing volume, cross-fading, and other audio properties to once again ensure consistency with the rest of the audio in the game. This proxy approach also provides automatic reclamation of the audio source if the owning class is destroyed or otherwise removed from the scene.
+						</p>
+						
+						<p><img alt="Submariner screenshot" src="assets/images/submariner.png"></p>
+						
+					</div> 
+				</article><!-- #post-## -->
+
+			</div> 
+		</div> <!-- /row post  -->
+
+</main>
+
+<footer id="underfooter">
+	<div class="container">
+		<div class="row">
+			
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+					<p>Contact me: <a href="mailto:macka1080@hotmail.com">macka1080@hotmail.com</a></p>
+				</div>
+			</div>
+
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+					<p class="text-right">
+						Copyright &copy; 2023, Matt Sayer<br> 
+						Original design: <a href="http://www.gettemplate.com" rel="designer">Initio by GetTemplate</a> </p>
+				</div>
+			</div>
+
+		</div> <!-- /row of widgets -->
+	</div>
+</footer>
+
+
+<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="assets/js/template.js"></script>
+</body>
+</html>
