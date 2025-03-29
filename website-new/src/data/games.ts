@@ -11,7 +11,6 @@ export interface Game {
   longDescription: string;
   imageUrl: string;
   thumnbNailUrl: string;
-  link: string;
   technologies: string[];
   features: FeatureSection[];
   screenshots: string[];
@@ -31,17 +30,13 @@ export const games: Game[] = [
     longDescription: 'This project was driven by my fondness for visiting rental stores as a kid. It\'s a short, narrative-driven experience where the player assumes the role of Lucas, a 12-year-old boy eager to make the most of his family\'s trip to their local rental store, Rewind Video.',
     imageUrl: '/images/rewind-night-store.png',
     thumnbNailUrl: '/images/rewind-night-cover-image.png',
-    link: '',
-    technologies: ['Unity', 'C#', 'Pixel Crushers Dialogue System', 'TextMeshPro'],
+    technologies: ['Unity', 'C#', 'Pixel Crushers Dialogue System', 'More MountainsTopDown Engine'],
     features: [
       {
         title: 'Dialogue',
         image: '/images/rewind-night-dialogue-choice.png',
         paragraphs: [
-          'The game features a branching dialogue system utilising Pixel Crushers\' Dialogue System for Unity. I customised the base implementation to:',
-          'Support text animation via vertex manipulation of the character meshes produced by Unity\'s TextMeshPro system',
-          'Allow for in-world speech bubbles that position themselves dynamically according to the speaker',
-          'Support emote speech bubbles alongside standard text'
+          'The game features a branching dialogue system utilising Pixel Crushers\' Dialogue System for Unity. I customised the base implementation to support text animation via vertex manipulation of the character meshes produced by Unity\'s TextMeshPro system, allow for in-world speech bubbles that position themselves dynamically according to the speaker, and support emote speech bubbles alongside standard text.',
         ]
       },
       {
@@ -75,8 +70,7 @@ export const games: Game[] = [
     longDescription: 'I worked on this project over the course of three months in my spare time. I began with the general concept of piloting a small submarine trapped in a vicious storm, expanding it out to a simple adventure-game structure where the player must collect various items to Macgyver together a solution to the storm problem.\n\nAfter fleshing out the general game structure, I created a relationship diagram to model the various systems I would need to build and how they would interact with each other. While not 100% accurate to the final product, this initial design is quite close and ensured the implementation phase progressed smoothly and efficiently.',
     imageUrl: '/images/submariner-screenshot.png',
     thumnbNailUrl: '/images/submariner-cover-image-thumb.png',
-    link: '',
-    technologies: ['Unity', 'C#', 'Gerstner Wave System', 'Custom Shaders'],
+    technologies: ['Unity', 'C#'],
     features: [
       {
         title: 'Buoyancy',
@@ -121,10 +115,9 @@ export const games: Game[] = [
     title: 'House of the Witch',
     description: 'An on-rails shooter where players take on the role of a forgetful witch racing to decorate her house in time for Halloween.',
     longDescription: 'Made over the course of a month as part of the MinnHax 2023 game jam, House of the Witch is an on-rails shooter where players take on the role of a forgetful witch racing to decorate her house in time for Halloween.\n\nFor this project, I used Godot, an engine I had no previous experience with. My two teammates handled the audio and visual assets for the game, while I took care of the programming as well as implementing everything in Godot (level design, animation, UI, etc…).\n\nDespite the challenges of working with an unfamiliar engine, I believe we accomplished quite a lot with our project. I put together a pseudo shader-compilation process to ameliorate some of Godot\'s inherent shader stuttering issues. I\'m also quite happy with the screen-capture component I built to highlight the before and after states of the game\'s timed decoration segments.',
-    imageUrl: '/images/witch-intro.png',
+    imageUrl: '/images/witch-greenhouse.png',
     thumnbNailUrl: '/images/house-of-the-witch-thumb.png',
-    link: '',
-    technologies: ['Godot', 'GDScript', 'Custom Shaders'],
+    technologies: ['Godot', 'GDScript'],
     features: [
     ],
     screenshots: [
@@ -142,10 +135,9 @@ export const games: Game[] = [
     title: 'Chorus of the Night',
     description: 'A roguelite twin-stick shooter with a musical theme.',
     longDescription: 'Chorus of the Night was my first Steam release. It\'s a roguelite twin-stick shooter with a musical theme, tasking players with fighting off waves of enemies styled after elements of the music scenes of the \'90s and early 2000s.\n\nWhile there\'s no shortage of roguelite wave-survival games these days, I feel the distinct theme and its incorporation into all the core gameplay elements helps Chorus of the Night stand out.',
-    imageUrl: '/images/AmpGif2small.gif',
+    imageUrl: '/images/chorus-thumb.jpg',
     thumnbNailUrl: '/images/chorus-thumb.jpg',
-    link: '',
-    technologies: ['Unity', 'C#', 'Roguelite Systems'],
+    technologies: ['Unity', 'C#'],
     features: [],
     screenshots: [
       '/images/AmpGif2small.gif'
@@ -164,8 +156,7 @@ export const games: Game[] = [
     longDescription: 'Light Forsaken is a lo-fi horror game built around limited visibility. Armed with a sonar-like pulsing device that briefly illuminates their surroundings, players explore a small-town shopping mall and evacuate the denizens trapped inside.\n\nWith Light Forsaken, I feel that I delivered a suitably moody atmosphere, with quirky dialogue and simple-yet-effective scares.',
     imageUrl: '/images/light-forsaken-food-court.png',
     thumnbNailUrl: '/images/light-forsaken-thumb.png',
-    link: '',
-    technologies: ['Unity', 'C#', 'Lighting System'],
+    technologies: ['Unity', 'C#'],
     features: [],
     screenshots: [
       '/images/light-forsaken-food-court.png'

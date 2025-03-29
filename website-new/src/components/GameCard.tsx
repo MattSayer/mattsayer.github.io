@@ -13,12 +13,15 @@ const GameCard = ({ title, description, thumnbNailUrl, link, technologies }: Gam
   return (
     <Link href={link} className="group">
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105">
-        <div className="relative w-full pt-[56.25%]">
+        <div className="w-full aspect-video">
           <Image
             src={thumnbNailUrl}
             alt={title}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            width={640}
+            height={360}
+            className="w-full h-full object-cover"
+            quality={75}
+            priority={false}
           />
         </div>
         <div className="p-6">

@@ -24,7 +24,7 @@ export default function GamePage({ params }: Props) {
     <main className="min-h-screen bg-gray-100 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Hero Section */}
-        <div className="relative h-96 w-full mb-8 rounded-lg overflow-hidden">
+        <div className="relative h-48 md:h-64 lg:h-96 w-full mb-8 rounded-lg overflow-hidden">
           <Image
             src={game.imageUrl}
             alt={game.title}
@@ -71,20 +71,7 @@ export default function GamePage({ params }: Props) {
             ))}
           </div>
 
-          {/* Technologies */}
-          <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Technologies Used</h2>
-            <div className="flex flex-wrap gap-2">
-              {game.technologies.map((tech, index) => (
-                <span
-                  key={index}
-                  className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 rounded-full text-sm"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
+          
 
           {/* Features */}
           {game.features.length > 0 && (
@@ -113,6 +100,21 @@ export default function GamePage({ params }: Props) {
               ))}
             </div>
           )}
+
+          {/* Technologies */}
+          <div className="mb-8">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Technologies Used</h2>
+            <div className="flex flex-wrap gap-2">
+              {game.technologies.map((tech, index) => (
+                <span
+                  key={index}
+                  className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 rounded-full text-sm"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
 
           {/* Screenshots */}
           <div>
